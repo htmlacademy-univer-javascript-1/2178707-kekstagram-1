@@ -1,13 +1,16 @@
-function getRandomNumber(min_value, max_value) 
+function getRandomNumber(min, max) 
 {
-    if (min_value > max_value) 
-        [min_value, max_value] = [max_value, min_value];
+    if (min > max) 
+        [min, max] = [max, min];
         
-    if (min_value < 0)
+    if (min < 0)
         throw {name: 'incorrectValues', message: 'Only positive values'};
 
-    return Math.floor(Math.random() * (max_value - min_value + 1) + min_value);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+getRandomNumber(24,45);
+
 
 /**
  * Функция сравнивает длину строки с передаваемым значением
@@ -19,4 +22,3 @@ function getRandomNumber(min_value, max_value)
 const checkLengthOfString = (str, length="140") => str.length <= length;
 
 checkLengthOfString("Какая-то случайная строка", 90);
-getRandomNumber(24,45);
