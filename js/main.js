@@ -1,9 +1,9 @@
 function getRandomNumber(min_value, max_value) 
 {
-    if (min > max) 
-        [min, max] = [max, min];
+    if (min_value > max_value) 
+        [min_value, max_value] = [max_value, min_value];
         
-    if (min < 0)
+    if (min_value < 0)
         throw {name: 'incorrectValues', message: 'Only positive values'};
 
     return Math.floor(Math.random() * (max_value - min_value + 1) + min_value);
