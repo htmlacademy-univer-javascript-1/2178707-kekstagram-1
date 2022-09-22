@@ -14,4 +14,4 @@ getRandomNumber(24,45);
 
 const checkLengthOfString = (str, length=140) => str.length <= length;
 
-checkLengthOfString('Какая-то случайная строка', 90);
+checkLengthOfString('Какая-то случайная строка.', 90);
