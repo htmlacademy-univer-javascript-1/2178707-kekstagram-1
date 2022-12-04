@@ -1,11 +1,5 @@
-// Правила задания
-const RULES = {
-  numPhoto: 25,
-  numLikes: {min: 15, max: 200}
-};
-
 // Данные для создания объектов
-const DATA = {
+export const DATA = {
   names: [
     'Алеша Попович',
     'Илья Муромец',
@@ -37,38 +31,3 @@ const DATA = {
     'Селфи с богатырями! /(L-L)/'
   ]
 };
-
-// Вспомогательные стрелочные функции
-// const checkLengthString = (str, length=140) => str.length <= length;
-
-const getRandomNumber = (min = 0, max = 10 ) => {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-const getRandomArrayElement = (array) => array[getRandomNumber(0, array.length - 1)];
-
-// Основные функции
-function createComment(idPost, idComm) {
-  return {
-    id: `${idPost*10000+idComm}`,
-    avatar: `img/avatar-${getRandomNumber(1, 6)}`,
-    message: getRandomArrayElement(DATA.messages),
-    name: getRandomArrayElement(DATA.names)
-  };
-}
-
-function createUserPostInfo(idPost) {
-  return {
-    id: idPost,
-    url:`photos/${idPost}.jpg`,
-    description: getRandomArrayElement(DATA.description),
-    likes: getRandomNumber(RULES.numLikes.min, RULES.numLikes.max),
-    comments: Array.from({length: getRandomNumber()}).map((value, index) => createComment(idPost, index + 1))
-  };
-}
-
-// eslint-disable-next-line no-unused-vars
-const resultModule4 = Array.from({length: 10}).map((value, index) => createUserPostInfo(index + 1));
