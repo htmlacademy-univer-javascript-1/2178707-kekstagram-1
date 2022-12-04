@@ -1,1 +1,1 @@
-import './render.js'
+import './render.js';

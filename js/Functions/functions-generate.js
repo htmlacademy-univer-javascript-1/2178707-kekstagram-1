@@ -18,8 +18,8 @@ function generateCommentData(idPost, idComm) {
 
 /**
  * @description The function generate an object (picture) with an andividual identifier from a random set
- * @param {int} idPost 
- */ 
+ * @param {int} idPost
+ */
 function generatePictureData(idPost) {
   return {
     id: idPost,
@@ -39,4 +39,4 @@ function generateArrayPicturesData() {
 }
 
 
-export { generateArrayPicturesData }
+export { generateArrayPicturesData };

@@ -4,15 +4,15 @@
  * @param {*} max upper limit of the range
  */
 const getRandomNumber = (min = 0, max = 10 ) => {
-    const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-    const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-    const result = Math.random() * (upper - lower + 1) + lower;
-    return Math.floor(result);
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
 };
 
 /**
  * @description The function returns a random element from the array
- * @param {*} array 
+ * @param {*} array
  */
 const getRandomArrayElement = (array) => array[getRandomNumber(0, array.length - 1)];
 
