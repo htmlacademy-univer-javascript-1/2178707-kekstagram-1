@@ -1,7 +1,7 @@
 import { COMMENTS_DATA } from '../data.js';
-import { getRandomNumber } from './functions-random.js';
-import { getRandomArrayElement } from './functions-random.js';
-import { pictureSettings } from '../Settings/module4-task1-settings.js';
+import { getRandomNumber } from './functions-randomizing.js';
+import { getRandomArrayElement } from './functions-randomizing.js';
+import { pictureSettings } from '../settings.js';
 
 /**
  * @description The function generate an object (comment) with an individual identifier from a random set
@@ -10,7 +10,7 @@ import { pictureSettings } from '../Settings/module4-task1-settings.js';
 function generateCommentData(idPost, idComm) {
   return {
     id: `${idPost*1000000+idComm}`,
-    avatar: `img/avatar-${getRandomNumber(1, 6)}`,
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
     message: getRandomArrayElement(COMMENTS_DATA.textComments),
     name: getRandomArrayElement(COMMENTS_DATA.nameUsers)
   };
