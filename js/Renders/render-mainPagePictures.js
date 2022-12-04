@@ -13,9 +13,7 @@ function createPicturesFragment() {
     newPicture.querySelector('.picture__img').src = url;
     newPicture.querySelector('.picture__comments').textContent = comments.length;
     newPicture.querySelector('.picture__likes').textContent = likes;
-    newPicture.addEventListener('click', function () {
-      renderingPictureWindow(url, comments, likes);
-    })
+    newPicture.addEventListener('click', () => renderingPictureWindow(url, comments, likes));
     newFragment.append(newPicture);
   });
   return newFragment;

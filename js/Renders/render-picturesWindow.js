@@ -11,22 +11,22 @@ function setHiddenSettings(pictureWindow) {
 }
 
 /**
- * @description The function adds a close button (click and ESC) to the window by id 
- * @param {*} window 
+ * @description The function adds a close button (click and ESC) to the window by id
+ * @param {*} window
  * @param {str} id format: '#[name-id]'
  */
 function addCloseButton(window, id) {
   const closeButton = window.querySelector(id);
-  closeButton.addEventListener('click', function () {
+  closeButton.addEventListener('click', () => {
     window.classList.add('hidden');
     doAfterClosePictureWindow();
-  })
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode == 27) {
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.keyCode === 27) {
       window.classList.add('hidden');
       doAfterClosePictureWindow();
-    };
-  })
+    }
+  });
 }
 
 function doAfterOpenPictureWindow() {
