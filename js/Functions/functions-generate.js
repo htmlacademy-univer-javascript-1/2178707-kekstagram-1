@@ -38,4 +38,5 @@ function generateArrayPicturesData() {
   return Array.from({length: pictureSettings.numPictures}).map((value, index) => generatePictureData(index + 1));
 }
 
+
 export { generateArrayPicturesData };
