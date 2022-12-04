@@ -1,15 +1,10 @@
 import { generateArrayPicturesData } from './Functions/functions-generate.js';
 
-const photosContainer = document.querySelector('.pictures');
-const pictureTemplate = document
-  .querySelector('#picture')
-  .content
-  .querySelector('.picture');
-
 /**
  * @description The function of creating a document fragment from pictures
  */
 function createPicturesFragment() {
+  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const newFragment = document.createDocumentFragment();
   const picturesData = generateArrayPicturesData();
   picturesData.forEach(({url, likes, comments}) => {
@@ -22,4 +17,5 @@ function createPicturesFragment() {
   return newFragment;
 }
 
+const photosContainer = document.querySelector('.pictures');
 photosContainer.append(createPicturesFragment());
