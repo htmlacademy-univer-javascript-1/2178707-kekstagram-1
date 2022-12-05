@@ -1,5 +1,4 @@
 const COMMENTS_DATA = {
-
   nameUsers: [
     'Алеша Попович',
     'Илья Муромец',

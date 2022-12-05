@@ -1,1 +1,3 @@
-import './render.js';
+import { renderingPicturesOnMainPage } from './Renders/render-mainPagePictures.js';
+
+renderingPicturesOnMainPage();
