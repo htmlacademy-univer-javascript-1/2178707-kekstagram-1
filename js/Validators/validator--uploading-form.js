@@ -43,7 +43,7 @@ function ValidateHastag(string) {
   if (string === '') {
     return true;
   }
-  let hastags = string.split(' ').map((hastag) => hastag.toLowerCase());
+  const hastags = string.split(' ').map((hastag) => hastag.toLowerCase());
   if (hastags.some((hastag) => hastag === '') && hastags.length > 1) {
     errorMessage = 'Не оставляйте пробел в конце строки';
     return false;
