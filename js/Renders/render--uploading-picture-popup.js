@@ -2,7 +2,7 @@ const formUploadingPicture = document.querySelector('.img-upload__form');
 const pictureFile = formUploadingPicture.querySelector('#upload-file');
 const uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
 
-pictureFile.addEventListener('change', function () {
+pictureFile.addEventListener('change', () => {
   renderingUploadingPicturesPopup();
 });
 
