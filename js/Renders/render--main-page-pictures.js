@@ -1,5 +1,5 @@
-import { generateArrayPicturesData } from '../Functions/functions-generating.js';
-import { renderingPictureWindow } from './render-picturesWindow.js';
+import { generateArrayPicturesData } from '../Functions/functions--generating.js';
+import { renderingPicturePopup } from './render--pictures-popup.js';
 
 /**
  * @description The function of creating a document fragment from pictures
@@ -13,7 +13,7 @@ function createPicturesFragment() {
     newPicture.querySelector('.picture__img').src = url;
     newPicture.querySelector('.picture__comments').textContent = comments.length;
     newPicture.querySelector('.picture__likes').textContent = likes;
-    newPicture.addEventListener('click', () => renderingPictureWindow(url, comments, likes));
+    newPicture.addEventListener('click', () => renderingPicturePopup(url, comments, likes));
     newFragment.append(newPicture);
   });
   return newFragment;
