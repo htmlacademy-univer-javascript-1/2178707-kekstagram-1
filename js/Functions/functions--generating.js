@@ -1,6 +1,6 @@
 import { COMMENTS_DATA } from '../data.js';
-import { getRandomNumber } from './functions-randomizing.js';
-import { getRandomArrayElement } from './functions-randomizing.js';
+import { getRandomNumber } from './functions--randomizing.js';
+import { getRandomArrayElement } from './functions--randomizing.js';
 import { pictureSettings } from '../settings.js';
 
 /**
