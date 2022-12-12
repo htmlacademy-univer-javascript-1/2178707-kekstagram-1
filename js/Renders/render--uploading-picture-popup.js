@@ -1,10 +1,9 @@
-var formUploadingPicture = document.querySelector('.img-upload__form');
-var pictureFile = formUploadingPicture.querySelector('#upload-file');
-var uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
-var popupPicture = formUploadingPicture.querySelector('.img-upload__preview');
+const formUploadingPicture = document.querySelector('.img-upload__form');
+const pictureFile = formUploadingPicture.querySelector('#upload-file');
+const uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
 
 pictureFile.addEventListener('change', function () {
-  renderingUploadingPicturesPopup(uploadedPicturePopup);
+  renderingUploadingPicturesPopup();
 });
 
 // =======================================================================
@@ -32,7 +31,7 @@ function addCloseButtonPopup() {
   function closePopupOnClick ()  {
     uploadedPicturePopup.classList.add('hidden');
     doAfterClosePopup();
-  };
+  }
 
   function closePopupOnKeydownESC (evt) {
     if (evt.keyCode === 27) {

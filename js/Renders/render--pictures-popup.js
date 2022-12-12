@@ -8,7 +8,7 @@
  * @param {*} pictureCommentsData Array of comments
  * @param {*} pictureLikes Count likes
  */
- function renderingPicturePopup(pictureUrl, pictureCommentsData, pictureLikes) {
+function renderingPicturePopup(pictureUrl, pictureCommentsData, pictureLikes) {
   const picturePopup = document.querySelector('.big-picture');
   picturePopup.querySelector('.big-picture__img').querySelector('img').src = pictureUrl;
   picturePopup.querySelector('.likes-count').textContent = pictureLikes;
@@ -19,7 +19,7 @@
     const newComment = createComment(commentData);
     picturePopupComments.append(newComment);
   });
-  
+
   doAfterOpenPopup(picturePopup);
   addCloseButtonPopup(picturePopup);
 
@@ -35,7 +35,7 @@
 /**
  * The function create a comment block
  */
- function createComment(commentData) {
+function createComment(commentData) {
   const comment = document.createElement('li');
   comment.classList.add('social__comment');
   comment.append(createCommentAvatar(commentData.name, commentData.avatar));
@@ -68,7 +68,7 @@ function createCommentText(text) {
  * @description The function adds a close button (click and ESC) to the popup
  * @param {*} popup
  */
- function addCloseButtonPopup(popup) {
+function addCloseButtonPopup(popup) {
   const closeButton = popup.querySelector('#picture-cancel');
   closeButton.addEventListener('click',  closePopupOnClick);
   document.addEventListener('keydown', closePopupOnKeydownESC);
@@ -76,8 +76,8 @@ function createCommentText(text) {
   function closePopupOnClick ()  {
     popup.classList.add('hidden');
     doAfterClosePopup();
-  };
-  
+  }
+
   function closePopupOnKeydownESC (evt) {
     if (evt.keyCode === 27) {
       popup.classList.add('hidden');

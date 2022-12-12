@@ -1,10 +1,10 @@
 const checkingHastag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
-var formUploadingPicture = document.querySelector('.img-upload__form');
-var uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
-var errorMessage = 'Не более 20 символов в одном хештеге';
-var description = uploadedPicturePopup.querySelector('.text__description');
-var hastags = uploadedPicturePopup.querySelector('.text__hashtags');
+const formUploadingPicture = document.querySelector('.img-upload__form');
+const uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
+let errorMessage = 'Не более 20 символов в одном хештеге';
+const description = uploadedPicturePopup.querySelector('.text__description');
+const hastagsField = uploadedPicturePopup.querySelector('.text__hashtags');
 
 const pristineUploadingForm = new Pristine(formUploadingPicture, {
   classTo: 'img-upload__field-wrapper',
@@ -30,7 +30,7 @@ pristineUploadingForm.addValidator(
 );
 
 pristineUploadingForm.addValidator(
-  hastags,
+  hastagsField,
   ValidateHastag,
   getErrorMessage
 );
@@ -40,10 +40,10 @@ pristineUploadingForm.addValidator(
  * @param {*} string - a string from the hastag field
  */
 function ValidateHastag(string) {
-  if (string == '') {
+  if (string === '') {
     return true;
   }
-  var hastags = string.split(' ').map(hastag => hastag.toLowerCase());
+  var hastags = string.split(' ').map((hastag) => hastag.toLowerCase());
   if (hastags.some((hastag) => hastag === '') && hastags.length > 1) {
     errorMessage = 'Не оставляйте пробел в конце строки';
     return false;
@@ -52,22 +52,20 @@ function ValidateHastag(string) {
     errorMessage = 'Не более 5 хештегов';
     return false;
   }
-  if (hastags.indexOf('#') != -1) {
+  if (hastags.indexOf('#') !== -1) {
     errorMessage = 'Пустой хештег';
     return false;
   }
   if (hastags.some((hastag) => !checkingHastag.test(hastag))) {
     errorMessage = 'Более 20 символов в хештеге или запрещенный символ в хештеге';
     return false;
-  };
-  if (hastags.length != [...new Set(hastags)].length) {
+  }
+  if (hastags.length !== [...new Set(hastags)].length) {
     errorMessage = 'Не повторяйте имена хештегов';
     return false;
   }
   return true;
 }
-
-var isValidHastag = (hastag) => checkingHastag.test(hastag);
 
 function getErrorMessage() {
   return errorMessage;
@@ -77,8 +75,8 @@ function getErrorMessage() {
 // //////////////////// Cancel escape with on focus ////////////////////////
 // ==========================================================================
 
-hastags.addEventListener('keydown', (evt) => {
-  cancelEscapeWithEsc(hastags, evt);
+hastagsField.addEventListener('keydown', (evt) => {
+  cancelEscapeWithEsc(hastagsField, evt);
 });
 
 description.addEventListener('keydown', (evt) => {
@@ -86,7 +84,7 @@ description.addEventListener('keydown', (evt) => {
 });
 
 function cancelEscapeWithEsc(field, evt) {
-  if (field === document.activeElement && evt.keyCode == 27) {
+  if (field === document.activeElement && evt.keyCode === 27) {
     evt.stopPropagation();
   }
 }
