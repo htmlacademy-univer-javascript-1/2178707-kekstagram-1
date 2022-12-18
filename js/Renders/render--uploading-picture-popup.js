@@ -14,7 +14,7 @@ pictureFile.addEventListener('change', () => {
   renderingUploadingPicturesPopup();
 });
 
-const getStringAttribute = (nameAttribute, value) =>  nameAttribute + '(' + value + ')';
+const getStringAttribute = (nameAttribute, value) =>  `${nameAttribute}(${value})`;
 // =======================================================================
 // //////////////////////// rendering a popup ///////////////////////////
 // =======================================================================
@@ -62,7 +62,7 @@ function addCloseButtonPopup() {
 function doAfterOpenPopup() {
   filterEffectSlider.classList.add('hidden');
   mainPicture.style.transform = getStringAttribute('scale', scalePopupSettings.start / 100);
-  scaleElement.value = String(scalePopupSettings.start) + '%';
+  scaleElement.value = `${valueScaleElement}%`;
   uploadedPicturePopup.classList.remove('hidden');
   document.body.classList.add('modal-open');
 }
@@ -87,7 +87,7 @@ function changeValueScaleBigger() {
   else {
     valueScaleElement += scalePopupSettings.step;
   }
-  scaleElement.value = String(valueScaleElement) + '%';
+  scaleElement.value = `${valueScaleElement}%`;
   mainPicture.style.transform = getStringAttribute('scale', valueScaleElement / 100);
 }
 
@@ -98,7 +98,7 @@ function changeValueScaleSmaller() {
   else {
     valueScaleElement -= scalePopupSettings.step;
   }
-  scaleElement.value = String(valueScaleElement) + '%';
+  scaleElement.value = `${valueScaleElement}%`;
   mainPicture.style.transform = getStringAttribute('scale', valueScaleElement / 100);
 }
 
@@ -117,10 +117,10 @@ filterEffects.forEach((effect) => {
     const effectName = evt.target.value;
     if (effectName !== 'none') {
       mainPicture.classList.add(getNameEffectClass(effectName));
-      mainPicture.classList.remove(getNameEffectClass(previewEffectValue))
+      mainPicture.classList.remove(getNameEffectClass(previewEffectValue));
       filterEffectSlider.classList.remove('hidden');
-      filterEffectSlider.noUiSlider.updateOptions(filterEffectSettings[effectName])
-      previewEffectValue = effectName; 
+      filterEffectSlider.noUiSlider.updateOptions(filterEffectSettings[effectName]);
+      previewEffectValue = effectName;
       filterEffectSlider.noUiSlider.on('update', () => {
         mainPicture.style.filter = getStringAttribute(effectsDictionary[effectName], filterEffectSlider.noUiSlider.get() + effectsMeasurements[effectName]);
       });
@@ -134,7 +134,7 @@ filterEffects.forEach((effect) => {
 });
 
 function getNameEffectClass (value){
-  return 'effects__preview--' + String(value);
+  return `effects__preview--${value}`;
 }
 
 noUiSlider.create(filterEffectSlider, filterEffectSettings.chrome);
