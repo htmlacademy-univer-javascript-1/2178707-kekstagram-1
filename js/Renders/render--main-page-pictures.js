@@ -2,6 +2,15 @@ import { generateArrayPicturesData } from '../Functions/functions--generating.js
 import { renderingPicturePopup } from './render--pictures-popup.js';
 
 /**
+ * @description The function rendering miniature pictures in the main page of the site,
+ * by adding them to the block with pictures
+ */
+function renderingPicturesOnMainPage() {
+  const photosContainer = document.querySelector('.pictures');
+  photosContainer.append(createPicturesFragment());
+}
+
+/**
  * @description The function of creating a document fragment from pictures
  */
 function createPicturesFragment() {
@@ -19,13 +28,5 @@ function createPicturesFragment() {
   return newFragment;
 }
 
-/**
- * @description The function rendering miniature pictures in the main page of the site,
- * by adding them to the block with pictures
- */
-function renderingPicturesOnMainPage() {
-  const photosContainer = document.querySelector('.pictures');
-  photosContainer.append(createPicturesFragment());
-}
 
 export { renderingPicturesOnMainPage };
