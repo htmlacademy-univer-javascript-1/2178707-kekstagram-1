@@ -6,7 +6,7 @@ const pictureSettings = {
 const scalePopupSettings = {
   step: 25,
   start: 55
-}
+};
 
 const filterEffectSettings  = {
   chrome: {
@@ -54,7 +54,7 @@ const filterEffectSettings  = {
     start: 3,
     connect: 'lower'
   }
-}
+};
 
 export { pictureSettings };
 export { scalePopupSettings };

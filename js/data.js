@@ -37,7 +37,7 @@ const effectsDictionary = {
   marvin: 'invert',
   phobos: 'blur',
   heat: 'brightness'
-}
+};
 
 const effectsMeasurements = {
   chrome: '',
@@ -45,7 +45,7 @@ const effectsMeasurements = {
   marvin: '%',
   phobos: 'px',
   heat: ''
-}
+};
 
 export { COMMENTS_DATA };
 export { effectsDictionary };

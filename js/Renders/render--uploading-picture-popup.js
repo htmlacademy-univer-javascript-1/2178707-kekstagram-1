@@ -1,11 +1,11 @@
-import { scalePopupSettings } from "../settings.js";
-import { filterEffectSettings } from "../settings.js";
-import { effectsDictionary } from "../data.js";
-import { effectsMeasurements } from "../data.js";
+import { scalePopupSettings } from '../settings.js';
+import { filterEffectSettings } from '../settings.js';
+import { effectsDictionary } from '../data.js';
+import { effectsMeasurements } from '../data.js';
 
 const formUploadingPicture = document.querySelector('.img-upload__form');
 const pictureFile = formUploadingPicture.querySelector('#upload-file');
-const mainPicture = formUploadingPicture.querySelector('.img-upload__preview')
+const mainPicture = formUploadingPicture.querySelector('.img-upload__preview');
 const uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
 const scaleElement = formUploadingPicture.querySelector('.scale__control--value');
 const filterEffectSlider = formUploadingPicture.querySelector('.effect-level__slider');
@@ -14,7 +14,7 @@ pictureFile.addEventListener('change', () => {
   renderingUploadingPicturesPopup();
 });
 
-
+const getStringAttribute = (nameAttribute, value) =>  nameAttribute + '(' + value + ')';
 // =======================================================================
 // //////////////////////// rendering a popup ///////////////////////////
 // =======================================================================
@@ -60,9 +60,9 @@ function addCloseButtonPopup() {
 }
 
 function doAfterOpenPopup() {
-  filterEffectSlider.classList.add('hidden')
+  filterEffectSlider.classList.add('hidden');
   mainPicture.style.transform = getStringAttribute('scale', scalePopupSettings.start / 100);
-  scaleElement.value = scalePopupSettings.start + '%';
+  scaleElement.value = String(scalePopupSettings.start) + '%';
   uploadedPicturePopup.classList.remove('hidden');
   document.body.classList.add('modal-open');
 }
@@ -73,7 +73,7 @@ function doAfterOpenPopup() {
 // =======================================================================
 
 
-let valueScaleElement = scalePopupSettings.start; 
+let valueScaleElement = scalePopupSettings.start;
 const scaleBiggerButton = formUploadingPicture.querySelector('.scale__control--bigger');
 const scaleSmallerButton = formUploadingPicture.querySelector('.scale__control--smaller');
 
@@ -87,8 +87,8 @@ function changeValueScaleBigger() {
   else {
     valueScaleElement += scalePopupSettings.step;
   }
-  scaleElement.value = valueScaleElement + '%';
-  mainPicture.style.transform = getStringAttribute('scale', valueScaleElement / 100); 
+  scaleElement.value = String(valueScaleElement) + '%';
+  mainPicture.style.transform = getStringAttribute('scale', valueScaleElement / 100);
 }
 
 function changeValueScaleSmaller() {
@@ -98,8 +98,8 @@ function changeValueScaleSmaller() {
   else {
     valueScaleElement -= scalePopupSettings.step;
   }
-  scaleElement.value = valueScaleElement + '%';
-  mainPicture.style.transform = getStringAttribute('scale', valueScaleElement / 100)
+  scaleElement.value = String(valueScaleElement) + '%';
+  mainPicture.style.transform = getStringAttribute('scale', valueScaleElement / 100);
 }
 
 
@@ -113,42 +113,28 @@ let previewEffectValue = '';
 
 
 filterEffects.forEach((effect) => {
-    effect.addEventListener('change', (evt) => {
-      const effectName = evt.target.value
-      if (effectName != 'none') {
-        mainPicture.classList.add(getNameEffectClass(effectName));
-        mainPicture.classList.remove(getNameEffectClass(previewEffectValue))
-        filterEffectSlider.classList.remove('hidden');
-        filterEffectSlider.noUiSlider.updateOptions(filterEffectSettings[effectName])
-        previewEffectValue = effectName; 
-        filterEffectSlider.noUiSlider.on('update', () => {
-          mainPicture.style.filter = getStringAttribute(effectsDictionary[effectName], filterEffectSlider.noUiSlider.get() + effectsMeasurements[effectName]);
-        });
-      }
-      else {
-        mainPicture.classList.remove(getNameEffectClass(previewEffectValue));
-        mainPicture.style.filter = null;
-        filterEffectSlider.classList.add('hidden')
-      }
-  })
-}) 
+  effect.addEventListener('change', (evt) => {
+    const effectName = evt.target.value;
+    if (effectName !== 'none') {
+      mainPicture.classList.add(getNameEffectClass(effectName));
+      mainPicture.classList.remove(getNameEffectClass(previewEffectValue))
+      filterEffectSlider.classList.remove('hidden');
+      filterEffectSlider.noUiSlider.updateOptions(filterEffectSettings[effectName])
+      previewEffectValue = effectName; 
+      filterEffectSlider.noUiSlider.on('update', () => {
+        mainPicture.style.filter = getStringAttribute(effectsDictionary[effectName], filterEffectSlider.noUiSlider.get() + effectsMeasurements[effectName]);
+      });
+    }
+    else {
+      mainPicture.classList.remove(getNameEffectClass(previewEffectValue));
+      mainPicture.style.filter = null;
+      filterEffectSlider.classList.add('hidden');
+    }
+  });
+});
 
 function getNameEffectClass (value){
-  return 'effects__preview--' + value;
-} 
+  return 'effects__preview--' + String(value);
+}
 
-noUiSlider.create(filterEffectSlider, filterEffectSettings.chrome)
-
-
-
-
-const getStringAttribute = (nameAttribute, value) =>  nameAttribute + '(' + value + ')';
-
-
-/*
-chrome
-sepia
-marvin
-phobos
-heat
-*/
+noUiSlider.create(filterEffectSlider, filterEffectSettings.chrome);
