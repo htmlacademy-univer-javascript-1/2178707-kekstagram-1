@@ -1,8 +1,8 @@
 const checkingHastag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+let errorMessage = 'Не более 20 символов в одном хештеге';
 
 const formUploadingPicture = document.querySelector('.img-upload__form');
 const uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
-let errorMessage = 'Не более 20 символов в одном хештеге';
 const description = uploadedPicturePopup.querySelector('.text__description');
 const hastagsField = uploadedPicturePopup.querySelector('.text__hashtags');
 
