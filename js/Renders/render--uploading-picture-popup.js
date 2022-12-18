@@ -9,6 +9,7 @@ const mainPicture = formUploadingPicture.querySelector('.img-upload__preview');
 const uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
 const scaleElement = formUploadingPicture.querySelector('.scale__control--value');
 const filterEffectSlider = formUploadingPicture.querySelector('.effect-level__slider');
+let valueScaleElement = scalePopupSettings.start;
 
 pictureFile.addEventListener('change', () => {
   renderingUploadingPicturesPopup();
@@ -73,7 +74,6 @@ function doAfterOpenPopup() {
 // =======================================================================
 
 
-let valueScaleElement = scalePopupSettings.start;
 const scaleBiggerButton = formUploadingPicture.querySelector('.scale__control--bigger');
 const scaleSmallerButton = formUploadingPicture.querySelector('.scale__control--smaller');
 
