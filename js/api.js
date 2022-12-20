@@ -5,7 +5,7 @@ import { pristineUploadingForm } from './Validators/validator--uploading-form.js
 
 fetch('https://26.javascript.pages.academy/kekstagram/data')
   .then((response) => response.json())
-  .then((pictures) => renderingPicturesOnMainPage(pictures))
+  .then((pictures) => renderingPicturesOnMainPage(pictures));
 
 
 // User-form
@@ -20,47 +20,6 @@ const description = uploadedPictureForm.querySelector('.text__description');
 const submitButton = uploadedPictureForm.querySelector('.img-upload__submit');
 
 
-// ==========================================================================
-// /////////////////////////////// Submit ///////////////////////////////////
-// ==========================================================================
-
-const setUserFormSubmit = (onSuccess) => {
-  formUploadingPicture.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristineUploadingForm.validate()
-    if (isValid) {
-      blockSubmitButton();
-      const formData = new FormData(evt.target)
-      fetch(
-        'https://26.javascript.pages.academy/kekstagram',
-        {
-          method: 'POST',
-          body: formData,
-        },
-      )
-        .then((response) => {
-          if (response.ok) {
-            onSuccess();
-            cleanTextInput();
-            unblockSubmitButton();
-            showSuccess();
-          }
-          else {
-            uploadedPictureForm.classList.add('hidden');
-            showError()
-          }
-        })
-        .catch((err) => {
-          uploadedPictureForm.classList.add('hidden');
-          showError()
-        });
-    }
-  });
-} 
-
-
-setUserFormSubmit(closeForm);
-
 
 
 // ==========================================================================
@@ -69,19 +28,19 @@ setUserFormSubmit(closeForm);
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
-  submitButton.textContent = 'ЗАГРУЖАЮ...'
-}
+  submitButton.textContent = 'ЗАГРУЖАЮ...';
+};
 
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
-  submitButton.textContent = 'ОПУБЛИКОВАТЬ'
-}
+  submitButton.textContent = 'ОПУБЛИКОВАТЬ';
+};
 
 
 
 
 // ==========================================================================
-// ////////////////////////////// Error message ////////////////////////////
+// ////////////////////////////// Error message /////////////////////////////
 // ==========================================================================
 
 // Error-popup-template
@@ -94,28 +53,28 @@ const errorButton = errorPopup.querySelector('.error__button');
 const showError = () => {
   errorButton.addEventListener('click', closeError);
   document.addEventListener('keydown', closeErorrOnKeydownEsc);
-  document.addEventListener('click', closeErrorOnClickOutput)
+  document.addEventListener('click', closeErrorOnClickOutput);
   document.body.append(errorPopup);
-}
+};
 
-const closeError = (evt) => {
+const closeError = () => {
   errorPopup.remove();
   cleanEvents();
   unblockSubmitButton();
-}
+};
 
 const closeErrorOnClickOutput = (evt) => {
   const isInsideClick = evt.composedPath().includes(errorPopup);
   if (isInsideClick) {
     closeError();
   }
-}
+};
 
 const closeErorrOnKeydownEsc = (evt) => {
   if (evt.keyCode === 27) {
     closeError();
   }
-}
+};
 
 
 
@@ -134,28 +93,28 @@ const successButton = successPopup.querySelector('.success__button');
 const showSuccess = () => {
   successButton.addEventListener('click', closeSuccess);
   document.addEventListener('keydown', closeSuccessOnKeydownEsc);
-  document.addEventListener('click', closeSuccessOnClickOutput)
+  document.addEventListener('click', closeSuccessOnClickOutput);
   document.body.append(successPopup);
-}
+};
 
 const closeSuccess = (evt) => {
   successPopup.remove();
   cleanEvents();
   unblockSubmitButton();
-}
+};
 
 const closeSuccessOnClickOutput = (evt) => {
-  const isInsideClick = evt.composedPath().includes(successPopup)
+  const isInsideClick = evt.composedPath().includes(successPopup);
   if (isInsideClick) {
     closeSuccess();
   }
-}
+};
 
 const closeSuccessOnKeydownEsc = (evt) => {
   if (evt.keyCode === 27) {
     closeSuccessr();
   }
-}
+};
 
 
 
@@ -166,7 +125,7 @@ const closeSuccessOnKeydownEsc = (evt) => {
 
 function cleanTextInput() {
   description.value = '';
-   hastagsField.value = '';
+  hastagsField.value = '';
 }
 
 const cleanEvents = () => {
@@ -174,5 +133,48 @@ const cleanEvents = () => {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', closeErorrOnKeydownEsc);
   document.removeEventListener('click', closeErrorOnClickOutput);
-}
+};
+
+
+
+
+// ==========================================================================
+// /////////////////////////////// Submit ///////////////////////////////////
+// ==========================================================================
+
+const setUserFormSubmit = (onSuccess) => {
+  formUploadingPicture.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristineUploadingForm.validate();
+    if (isValid) {
+      blockSubmitButton();
+      const formData = new FormData(evt.target);
+      fetch(
+        'https://26.javascript.pages.academy/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      )
+        .then((response) => {
+          if (response.ok) {
+            onSuccess();
+            cleanTextInput();
+            unblockSubmitButton();
+            showSuccess();
+          }
+          else {
+            uploadedPictureForm.classList.add('hidden');
+            showError();
+          }
+        })
+        .catch(() => {
+          uploadedPictureForm.classList.add('hidden');
+          showError();
+        });
+    }
+  });
+} 
+
+setUserFormSubmit(closeForm);
 

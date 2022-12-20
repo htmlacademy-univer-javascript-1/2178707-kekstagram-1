@@ -13,7 +13,7 @@ const pictureFile = userForm.querySelector('#upload-file');
 const mainPicture = userForm.querySelector('.img-upload__preview');
 // Picture-form
 const uploadedPictureForm = userForm.querySelector('.img-upload__overlay');
-// Effect intensivity scale 
+// Effect intensivity scale
 const filterEffectSlider = userForm.querySelector('.effect-level__slider');
 // Effects checkbox (radio)
 const filterEffects = userForm.querySelectorAll('.effects__radio');
@@ -97,8 +97,8 @@ function addPicturesEffect () {
   filterEffects.forEach((effect) => {
     effect.addEventListener('change', (evt) => {
       const effectName = evt.target.value;
-      if (effectName !== 'none') { setSelectedEffect(effectName) }
-      else { setOriginalEffect(effectName) }
+      if (effectName !== 'none') { setSelectedEffect(effectName); }
+      else { setOriginalEffect(); }
     });
   });
 }
@@ -111,13 +111,13 @@ function setSelectedEffect(effectName) {
   previewEffectName = effectName;
   filterEffectSlider.noUiSlider.on('update', () => {
     mainPicture.style.filter = getStringAttribute(
-      effectsDictionary[effectName], 
+      effectsDictionary[effectName],
       filterEffectSlider.noUiSlider.get() + effectsMeasurements[effectName]
     );
   });
 }
 
-function setOriginalEffect(effectName) {
+function setOriginalEffect() {
   mainPicture.classList.remove(getNameEffectClass(previewEffectName));
   mainPicture.style.filter = null;
   filterEffectSlider.classList.add('hidden');
@@ -147,7 +147,7 @@ function closeForm ()  {
 
 function closeFormOnKeydownESC (evt) {
   if (evt.keyCode === 27) {
-    closeForm()
+    closeForm();
   }
 }
 
