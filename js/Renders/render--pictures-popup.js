@@ -1,3 +1,5 @@
+const picturePopup = document.querySelector('.big-picture');
+
 // =======================================================================
 // /////////////////////////// rendering popup ///////////////////////////
 // =======================================================================
@@ -9,32 +11,37 @@
  * @param {*} pictureLikes Count likes
  */
 function renderingPicturePopup(pictureUrl, pictureCommentsData, pictureLikes) {
-  const picturePopup = document.querySelector('.big-picture');
+
   picturePopup.querySelector('.big-picture__img').querySelector('img').src = pictureUrl;
   picturePopup.querySelector('.likes-count').textContent = pictureLikes;
   picturePopup.querySelector('.comments-count').textContent = pictureCommentsData.length;
+
+  createCommentsBlock(pictureCommentsData);
+  doAfterOpenPopup();
+  addCloseButtonPopup();
+
+  // temprorality
+  picturePopup.querySelector('.social__comment-count').classList.add('hidden');
+  picturePopup.querySelector('.comments-loader').classList.add('hidden');
+
+}
+
+
+
+
+// =======================================================================
+// ///////////////////// rendering comments block ////////////////////////
+// =======================================================================
+
+function createCommentsBlock(pictureCommentsData) {
   const picturePopupComments = picturePopup.querySelector('.social__comments');
   picturePopupComments.innerHTML = '';
   pictureCommentsData.forEach((commentData) => {
     const newComment = createComment(commentData);
     picturePopupComments.append(newComment);
   });
-
-  doAfterOpenPopup(picturePopup);
-  addCloseButtonPopup(picturePopup);
-
-  // temprorality
-  picturePopup.querySelector('.social__comment-count').classList.add('hidden');
-  picturePopup.querySelector('.comments-loader').classList.add('hidden');
 }
 
-// =======================================================================
-// ////////////////////// create comment block ///////////////////////////
-// =======================================================================
-
-/**
- * The function create a comment block
- */
 function createComment(commentData) {
   const comment = document.createElement('li');
   comment.classList.add('social__comment');
@@ -60,40 +67,52 @@ function createCommentText(text) {
   return commentText;
 }
 
+
+
+
 // =======================================================================
-// /////////////////////////// do with popup /////////////////////////////
+// ////////////////////// close button settings //////////////////////////
 // =======================================================================
 
-/**
- * @description The function adds a close button (click and ESC) to the popup
- * @param {*} popup
- */
-function addCloseButtonPopup(popup) {
-  const closeButton = popup.querySelector('#picture-cancel');
-  closeButton.addEventListener('click',  closePopupOnClick);
+function addCloseButtonPopup() {
+  const closeButton = picturePopup.querySelector('#picture-cancel');
+  closeButton.addEventListener('click',  closePopup);
   document.addEventListener('keydown', closePopupOnKeydownESC);
+}
 
-  function closePopupOnClick ()  {
-    popup.classList.add('hidden');
-    doAfterClosePopup();
-  }
+function closePopup () {
+  picturePopup.classList.add('hidden');
+  doAfterClosePopup();
+}
 
-  function closePopupOnKeydownESC (evt) {
-    if (evt.keyCode === 27) {
-      popup.classList.add('hidden');
-      doAfterClosePopup();
-    }
-  }
-
-  function doAfterClosePopup() {
-    document.body.classList.remove('modal-open');
-    document.removeEventListener('keydown', closePopupOnKeydownESC);
+function closePopupOnKeydownESC (evt) {
+  if (evt.keyCode === 27) {
+    closePopup();
   }
 }
 
-function doAfterOpenPopup(popup) {
-  popup.classList.remove('hidden');
+
+
+
+// =======================================================================
+// //////////////////////// open/close settings //////////////////////////
+// =======================================================================
+
+function doAfterOpenPopup() {
+  picturePopup.classList.remove('hidden');
   document.body.classList.add('modal-open');
 }
+
+function doAfterClosePopup() {
+  document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', closePopupOnKeydownESC);
+}
+
+
+
+
+// =======================================================================
+// /////////////////////////////// export ////////////////////////////////
+// =======================================================================
 
 export { renderingPicturePopup };

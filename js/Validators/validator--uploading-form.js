@@ -1,10 +1,22 @@
+// Regular expression (RegExp) for checking hastag
 const checkingHastag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-let errorMessage = 'Не более 20 символов в одном хештеге';
 
+
+// User-form
 const formUploadingPicture = document.querySelector('.img-upload__form');
-const uploadedPicturePopup = formUploadingPicture.querySelector('.img-upload__overlay');
-const description = uploadedPicturePopup.querySelector('.text__description');
-const hastagsField = uploadedPicturePopup.querySelector('.text__hashtags');
+// Form-picture
+const uploadedPictureForm = formUploadingPicture.querySelector('.img-upload__overlay');
+// Form-hastag
+const hastagsField = uploadedPictureForm.querySelector('.text__hashtags');
+// Form-description
+const description = uploadedPictureForm.querySelector('.text__description');
+
+
+
+
+// ==========================================================================
+// ////////////////////////// Create pristine ///////////////////////////////
+// ==========================================================================
 
 const pristineUploadingForm = new Pristine(formUploadingPicture, {
   classTo: 'img-upload__field-wrapper',
@@ -12,33 +24,29 @@ const pristineUploadingForm = new Pristine(formUploadingPicture, {
   errorTextClass: 'img-upload__field-wrapper__error'
 });
 
+
+
+
 // ==========================================================================
 // ///////////////////////////// Validating ////////////////////////////////
 // ==========================================================================
 
-formUploadingPicture.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  if (pristineUploadingForm.validate()) {
-    formUploadingPicture.submit();
-  }
-});
+let errorMessage = '';
 
+// Description-validating
 pristineUploadingForm.addValidator(
   description,
   (string) => string.length <= 140,
   'Длина комментария не более 140 символов'
 );
 
+// Hastag-validating
 pristineUploadingForm.addValidator(
   hastagsField,
   ValidateHastag,
   getErrorMessage
 );
 
-/**
- * @description The function of checking the validity of hastags entered
- * @param {*} string - a string from the hastag field
- */
 function ValidateHastag(string) {
   if (string === '') {
     return true;
@@ -71,6 +79,9 @@ function getErrorMessage() {
   return errorMessage;
 }
 
+
+
+
 // ==========================================================================
 // //////////////////// Cancel escape with on focus ////////////////////////
 // ==========================================================================
@@ -88,3 +99,12 @@ function cancelEscapeWithEsc(field, evt) {
     evt.stopPropagation();
   }
 }
+
+
+
+
+// =======================================================================
+// /////////////////////////////// export ////////////////////////////////
+// =======================================================================
+
+export { pristineUploadingForm };
