@@ -10,8 +10,6 @@ const uploadedPictureForm = formUploadingPicture.querySelector('.img-upload__ove
 const hastagsField = uploadedPictureForm.querySelector('.text__hashtags');
 // Form-description
 const description = uploadedPictureForm.querySelector('.text__description');
-// Form-submit-button
-const submitButton = uploadedPictureForm.querySelector('.img-upload__submit');
 
 
 
