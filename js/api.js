@@ -155,7 +155,7 @@ function closeSuccessOnClickOutput(evt) {
 
 function closeSuccessOnKeydownEsc(evt) {
   if (evt.keyCode === 27) {
-    closeSuccessr();
+    closeSuccess();
   }
 }
 
