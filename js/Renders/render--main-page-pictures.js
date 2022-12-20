@@ -1,22 +1,25 @@
-import { generateArrayPicturesData } from '../Functions/functions--generating.js';
 import { renderingPicturePopup } from './render--pictures-popup.js';
 
-/**
- * @description The function rendering miniature pictures in the main page of the site,
- * by adding them to the block with pictures
- */
-function renderingPicturesOnMainPage() {
-  const photosContainer = document.querySelector('.pictures');
-  photosContainer.append(createPicturesFragment());
+
+// Container for pictures
+const picturesContainer = document.querySelector('.pictures');
+// Picture markup template (html)
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+// Document-fragment
+const newFragment = document.createDocumentFragment();
+
+
+
+
+// =======================================================================
+// //////////////////////// rendering pictures ///////////////////////////
+// =======================================================================
+
+function renderingPicturesOnMainPage(picturesData) {
+  picturesContainer.append(createPicturesFragment(picturesData));
 }
 
-/**
- * @description The function of creating a document fragment from pictures
- */
-function createPicturesFragment() {
-  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  const newFragment = document.createDocumentFragment();
-  const picturesData = generateArrayPicturesData();
+function createPicturesFragment(picturesData) {
   picturesData.forEach(({url, likes, comments}) => {
     const newPicture = pictureTemplate.cloneNode(true);
     newPicture.querySelector('.picture__img').src = url;
@@ -28,5 +31,11 @@ function createPicturesFragment() {
   return newFragment;
 }
 
+
+
+
+// =======================================================================
+// /////////////////////////////// export ////////////////////////////////
+// =======================================================================
 
 export { renderingPicturesOnMainPage };
