@@ -15,9 +15,13 @@ const getDiscussedFilteredPictures = (pictures) => pictures.slice().sort(compare
 // ////////////////////////////// Comparing /////////////////////////////////
 // ==========================================================================
 
-const compareDiscussing = (picture1, picture2) => picture2.comments.length - picture1.comments.length;
+function compareDiscussing (picture1, picture2) {
+  return picture2.comments.length - picture1.comments.length;
+}
 
-const compareRandom = (picture1, picture2) => 0.5 - Math.random();
+function compareRandom () {
+  return 0.5 - Math.random();
+} 
 
 
 

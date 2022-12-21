@@ -1,6 +1,6 @@
-import { getDefaultFilteredPictures } from "../Filters/filters--main-page-pictures.js";
-import { getDiscussedFilteredPictures } from "../Filters/filters--main-page-pictures.js";
-import { getRandomFilteredPictures } from "../Filters/filters--main-page-pictures.js";
+import { getDefaultFilteredPictures } from '../Filters/filters--main-page-pictures.js';
+import { getDiscussedFilteredPictures } from '../Filters/filters--main-page-pictures.js';
+import { getRandomFilteredPictures } from '../Filters/filters--main-page-pictures.js';
 
 
 // Filter-field

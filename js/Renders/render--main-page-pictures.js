@@ -33,7 +33,7 @@ function createPicturesFragment(picturesData) {
 }
 
 function getDefaultContainerState() {
-  const currentPictures = picturesContainer.querySelectorAll('.picture')
+  const currentPictures = picturesContainer.querySelectorAll('.picture');
   currentPictures.forEach((picture) => {
     picturesContainer.removeChild(picture);
   });

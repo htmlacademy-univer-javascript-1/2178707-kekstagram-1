@@ -8,7 +8,7 @@ const picturePopup = document.querySelector('.big-picture');
 
 function renderingPicturePopup(pictureUrl, pictureCommentsData, pictureLikes) {
   doAfterOpenPopup();
-  setPicturePopupData(pictureUrl, pictureLikes, pictureCommentsData.length)
+  setPicturePopupData(pictureUrl, pictureLikes, pictureCommentsData.length);
   createCommentsBlock(pictureCommentsData);
   addCloseButtonPopup();
 
