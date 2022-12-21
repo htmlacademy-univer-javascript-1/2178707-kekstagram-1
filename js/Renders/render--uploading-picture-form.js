@@ -4,6 +4,7 @@ import { effectsDictionary } from '../data.js';
 import { effectsMeasurements } from '../data.js';
 import { getStringAttribute } from '../util.js';
 import { getNameEffectClass } from '../util.js';
+import { checkValidateUploadingFile } from '../Validators/validator--uploading-form.js';
 
 
 // User-form
@@ -20,8 +21,10 @@ const filterEffectSlider = userForm.querySelector('.effect-level__slider');
 const filterEffects = userForm.querySelectorAll('.effects__radio');
 
 
-pictureFile.addEventListener('change', () => {
-  renderingUploadingPicturesForm();
+pictureFile.addEventListener('change', (evt) => {
+  if (checkValidateUploadingFile(evt.target.files[0])) {
+    renderingUploadingPicturesForm();
+  }
 });
 
 
@@ -33,11 +36,22 @@ pictureFile.addEventListener('change', () => {
 
 function renderingUploadingPicturesForm() {
   doAfterOpenForm();
+  setPicture();
   addScalePicture();
   addPicturesEffect();
   addCloseButtonForm();
 }
 
+
+
+
+// =======================================================================
+// ////////////////////// rendering the picture //////////////////////////
+// =======================================================================
+
+function setPicture() {
+  mainPicture.querySelector('img').src = URL.createObjectURL(pictureFile.files[0]);
+}
 
 
 
@@ -107,6 +121,7 @@ function setSelectedEffect(effectName) {
   mainPicture.classList.remove(getNameEffectClass(previewEffectName));
   filterEffectSlider.classList.remove('hidden');
   filterEffectSlider.noUiSlider.updateOptions(filterEffectSettings[effectName]);
+  filterEffectSlider.noUiSlider.set(filterEffectSettings[effectName].range.max);
   previewEffectName = effectName;
   filterEffectSlider.noUiSlider.on('update', () => {
     mainPicture.style.filter = getStringAttribute(
@@ -165,13 +180,15 @@ function doAfterOpenForm() {
 }
 
 function doAfterCloseForm() {
+  userForm.querySelector('.text__hashtags').value = '';
+  userForm.querySelector('.text__description').value = '';
   document.body.classList.remove('modal-open');
+  mainPicture.classList.remove(getNameEffectClass(previewEffectName));
+  filterEffectSlider.classList.add('hidden');
+  mainPicture.style.filter = null;
+  pictureFile.value = '';
   closeButton.removeEventListener('click',  closeForm);
   document.removeEventListener('keydown', closeFormOnKeydownESC);
-  mainPicture.classList.remove(getNameEffectClass(previewEffectName));
-  mainPicture.style.filter = null;
-  filterEffectSlider.classList.add('hidden');
-  pictureFile.value = '';
 }
 
 

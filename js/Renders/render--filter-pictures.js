@@ -19,7 +19,7 @@ const discussedFilterButton = filterField.querySelector('#filter-discussed');
 // ///////////////// Filters button settings /////////////////////////////
 // =======================================================================
 
-const setDefualtFilterClick = (renderingPictures) => {
+const setFilterClick = (renderingPictures) => {
   defaultFilterButton.addEventListener('click', (evt) => {
     setActiveButton(evt.target);
     renderingPictures(getDefaultFilteredPictures);
@@ -44,4 +44,4 @@ function setActiveButton(button) {
 // /////////////////////////////// export ////////////////////////////////
 // =======================================================================
 
-export { setDefualtFilterClick };
+export { setFilterClick};

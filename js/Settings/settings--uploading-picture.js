@@ -38,5 +38,8 @@ const filterEffectSettings  = {
   }
 };
 
+const ALLOWED_UPLOADING_TYPES = ['.gif', '.jpeg', '.jpg', '.png', '.svg'];
+
 export { scalePopupSettings };
 export { filterEffectSettings };
+export { ALLOWED_UPLOADING_TYPES };
