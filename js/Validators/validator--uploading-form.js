@@ -24,6 +24,7 @@ const description = uploadedPictureForm.querySelector('.text__description');
 function checkValidateUploadingFile(file) {
   const fileName = file.name.toLowerCase();
   const isValideFile = ALLOWED_UPLOADING_TYPES.some((fileType) => fileName.endsWith(fileType));
+  return isValideFile;
 }
 
 
