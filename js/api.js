@@ -1,11 +1,9 @@
-import { renderingPicturesOnMainPage } from './Renders/render--main-page-pictures.js';
 import { closeForm } from './Renders/render--uploading-picture-form.js';
 import { pristineUploadingForm } from './Validators/validator--uploading-form.js';
-
-
-fetch('https://26.javascript.pages.academy/kekstagram/data')
-  .then((response) => response.json())
-  .then((pictures) => renderingPicturesOnMainPage(pictures));
+import { setDefualtFilterClick } from './Renders/render--filter-pictures.js';
+import { EVENT_RESPONSE_TIME } from './Settings/settings--events-time.js';
+import { renderingPicturesOnMainPage } from './Renders/render--main-page-pictures.js';
+import { debounce } from './util.js';
 
 
 // User-form
@@ -19,6 +17,20 @@ const description = uploadedPictureForm.querySelector('.text__description');
 // Form-submit-button
 const submitButton = uploadedPictureForm.querySelector('.img-upload__submit');
 
+
+
+// ==========================================================================
+// ////////////////////// request to the server /////////////////////////////
+// ==========================================================================
+
+fetch('https://26.javascript.pages.academy/kekstagram/data')
+  .then((response) => response.json())
+  .then((pictures) => {
+    renderingPicturesOnMainPage(pictures);
+    setDefualtFilterClick(debounce((defaultFilter) => renderingPicturesOnMainPage(defaultFilter(pictures)), EVENT_RESPONSE_TIME));
+    showFilltersField();
+  })
+  .catch();
 
 
 
@@ -62,6 +74,7 @@ const setUserFormSubmit = (onSuccess) => {
 };
 
 setUserFormSubmit(closeForm);
+
 
 
 
@@ -160,6 +173,13 @@ function closeSuccessOnKeydownEsc(evt) {
 }
 
 
+// ==========================================================================
+// /////////////////////////////// Cleaning /////////////////////////////////
+// ==========================================================================
+
+function showFilltersField() {
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+}
 
 
 // ==========================================================================

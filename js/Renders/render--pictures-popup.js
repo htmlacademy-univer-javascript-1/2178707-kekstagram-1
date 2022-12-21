@@ -1,23 +1,15 @@
+// =======================================================================
+// /////////////////////////// Rendering popup ///////////////////////////
+// =======================================================================
+
+// Picture-popup
 const picturePopup = document.querySelector('.big-picture');
 
-// =======================================================================
-// /////////////////////////// rendering popup ///////////////////////////
-// =======================================================================
 
-/**
- * @description The function of rendering a picture window after clicking on the thumbnail image
- * @param {*} pictureUrl Url img
- * @param {*} pictureCommentsData Array of comments
- * @param {*} pictureLikes Count likes
- */
 function renderingPicturePopup(pictureUrl, pictureCommentsData, pictureLikes) {
-
-  picturePopup.querySelector('.big-picture__img').querySelector('img').src = pictureUrl;
-  picturePopup.querySelector('.likes-count').textContent = pictureLikes;
-  picturePopup.querySelector('.comments-count').textContent = pictureCommentsData.length;
-
-  createCommentsBlock(pictureCommentsData);
   doAfterOpenPopup();
+  setPicturePopupData(pictureUrl, pictureLikes, pictureCommentsData.length);
+  createCommentsBlock(pictureCommentsData);
   addCloseButtonPopup();
 
   // temprorality
@@ -26,11 +18,17 @@ function renderingPicturePopup(pictureUrl, pictureCommentsData, pictureLikes) {
 
 }
 
+function setPicturePopupData(pictureUrl, pictureCommentsLength, pictureLikes) {
+  picturePopup.querySelector('.big-picture__img').querySelector('img').src = pictureUrl;
+  picturePopup.querySelector('.likes-count').textContent = pictureLikes;
+  picturePopup.querySelector('.comments-count').textContent = pictureCommentsLength;
+}
+
 
 
 
 // =======================================================================
-// ///////////////////// rendering comments block ////////////////////////
+// ///////////////////// Creating comments block /////////////////////////
 // =======================================================================
 
 function createCommentsBlock(pictureCommentsData) {
@@ -71,11 +69,14 @@ function createCommentText(text) {
 
 
 // =======================================================================
-// ////////////////////// close button settings //////////////////////////
+// ////////////////////// Close button settings //////////////////////////
 // =======================================================================
 
+// Close-popup-button
+const closeButton = picturePopup.querySelector('#picture-cancel');
+
+
 function addCloseButtonPopup() {
-  const closeButton = picturePopup.querySelector('#picture-cancel');
   closeButton.addEventListener('click',  closePopup);
   document.addEventListener('keydown', closePopupOnKeydownESC);
 }
@@ -95,7 +96,7 @@ function closePopupOnKeydownESC (evt) {
 
 
 // =======================================================================
-// //////////////////////// open/close settings //////////////////////////
+// //////////////////////// Open/close settings //////////////////////////
 // =======================================================================
 
 function doAfterOpenPopup() {
@@ -105,6 +106,7 @@ function doAfterOpenPopup() {
 
 function doAfterClosePopup() {
   document.body.classList.remove('modal-open');
+  closeButton.removeEventListener('click',  closePopup);
   document.removeEventListener('keydown', closePopupOnKeydownESC);
 }
 
@@ -112,7 +114,7 @@ function doAfterClosePopup() {
 
 
 // =======================================================================
-// /////////////////////////////// export ////////////////////////////////
+// /////////////////////////////// Export ////////////////////////////////
 // =======================================================================
 
 export { renderingPicturePopup };
