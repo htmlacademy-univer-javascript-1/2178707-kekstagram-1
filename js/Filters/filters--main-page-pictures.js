@@ -4,7 +4,7 @@
 
 const getDefaultFilteredPictures = (pictures) => pictures;
 
-const getRandomFilteredPictures = (pictures) => pictures.slice().sort(compareRandom);
+const getRandomFilteredPictures = (pictures) => pictures.slice().sort(compareRandom).slice(0, 10);
 
 const getDiscussedFilteredPictures = (pictures) => pictures.slice().sort(compareDiscussing);
 
