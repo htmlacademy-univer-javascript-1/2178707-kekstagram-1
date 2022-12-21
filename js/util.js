@@ -1,4 +1,4 @@
-import { ALERT_MESSAGE_SHOW_TIME } from "./Settings/settings--events-time.js";
+import { ALERT_MESSAGE_SHOW_TIME } from './Settings/settings--events-time.js';
 
 const getStringAttribute = (nameAttribute, value) =>  `${nameAttribute}(${value})`;
 
@@ -31,7 +31,7 @@ const showAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_MESSAGE_SHOW_TIME);
-}
+};
 
 
 export { getStringAttribute };

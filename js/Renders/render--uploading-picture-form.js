@@ -180,13 +180,15 @@ function doAfterOpenForm() {
 }
 
 function doAfterCloseForm() {
+  userForm.querySelector('.text__hashtags').value = '';
+  userForm.querySelector('.text__description').value = '';
   document.body.classList.remove('modal-open');
+  mainPicture.classList.remove(getNameEffectClass(previewEffectName));
+  filterEffectSlider.classList.add('hidden');
+  mainPicture.style.filter = null;
+  pictureFile.value = '';
   closeButton.removeEventListener('click',  closeForm);
   document.removeEventListener('keydown', closeFormOnKeydownESC);
-  mainPicture.classList.remove(getNameEffectClass(previewEffectName));
-  mainPicture.style.filter = null;
-  filterEffectSlider.classList.add('hidden');
-  pictureFile.value = '';
 }
 
 

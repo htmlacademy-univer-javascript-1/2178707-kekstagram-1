@@ -174,6 +174,8 @@ function closeSuccessOnKeydownEsc(evt) {
 }
 
 
+
+
 // ==========================================================================
 // ///////////////////////////// Filters field //////////////////////////////
 // ==========================================================================
@@ -181,6 +183,8 @@ function closeSuccessOnKeydownEsc(evt) {
 function showFilltersField() {
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 }
+
+
 
 
 // ==========================================================================

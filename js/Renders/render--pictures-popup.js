@@ -1,4 +1,4 @@
-import { COUNTS_LOADING_COMMENT } from "../Settings/settings--popup-picture.js";
+import { COUNTS_LOADING_COMMENT } from '../Settings/settings--popup-picture.js';
 
 // =======================================================================
 // /////////////////////////// Rendering popup ///////////////////////////
@@ -8,8 +8,6 @@ import { COUNTS_LOADING_COMMENT } from "../Settings/settings--popup-picture.js";
 const picturePopup = document.querySelector('.big-picture');
 // Count comments (# из ##)
 const commentsCount = picturePopup.querySelector('.social__comment-count');
-// Default-comments-count
-const defaultCommentsCount = commentsCount.cloneNode(true);
 // Comments-block
 const popupPictureComments = picturePopup.querySelector('.social__comments');
 // All-comments-count
@@ -81,20 +79,20 @@ function createCommentText(text) {
 // Comments-loader-button
 const commentsLoaderButton = picturePopup.querySelector('.comments-loader');
 // Current-comment-count
-var currentCommentCount = 0;
+ let currentCommentCount = 0;
 
-commentsLoaderButton.addEventListener('click', loadComments)
+commentsLoaderButton.addEventListener('click', loadComments);
 
 function loadComments() {
   const hiddenComments = popupPictureComments.querySelectorAll('.hidden');
-  for (var i = 0; i < COUNTS_LOADING_COMMENT && i < hiddenComments.length; i++) {
+  for (let i = 0; i < COUNTS_LOADING_COMMENT && i < hiddenComments.length; i++) {
     hiddenComments[i].classList.remove('hidden');
     if (i === hiddenComments.length - 1) {
       commentsLoaderButton.classList.add('hidden');
     }
     currentCommentCount += 1;
   }
-  commentsCount.innerHTML = `${currentCommentCount} из ${allCommentsCount.innerHTML} комментариев`
+  commentsCount.innerHTML = `${currentCommentCount} из ${allCommentsCount.innerHTML} комментариев`;
 }
 
 

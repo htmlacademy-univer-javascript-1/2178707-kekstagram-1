@@ -1,4 +1,4 @@
-import { ALLOWED_UPLOADING_TYPES } from "../Settings/settings--uploading-picture.js";
+import { ALLOWED_UPLOADING_TYPES } from '../Settings/settings--uploading-picture.js';
 
 
 // Regular expression (RegExp) for checking hastag
