@@ -1,3 +1,6 @@
+import { ALLOWED_UPLOADING_TYPES } from '../Settings/settings--uploading-picture.js';
+
+
 // Regular expression (RegExp) for checking hastag
 const checkingHastag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
@@ -10,6 +13,19 @@ const uploadedPictureForm = formUploadingPicture.querySelector('.img-upload__ove
 const hastagsField = uploadedPictureForm.querySelector('.text__hashtags');
 // Form-description
 const description = uploadedPictureForm.querySelector('.text__description');
+
+
+
+
+// ==========================================================================
+// ////////////////////////// Check uploading file ////////////////////////////////
+// ==========================================================================
+
+function checkValidateUploadingFile(file) {
+  const fileName = file.name.toLowerCase();
+  const isValideFile = ALLOWED_UPLOADING_TYPES.some((fileType) => fileName.endsWith(fileType));
+  return isValideFile;
+}
 
 
 
@@ -108,3 +124,4 @@ function cancelEscapeWithEsc(field, evt) {
 // =======================================================================
 
 export { pristineUploadingForm };
+export { checkValidateUploadingFile };

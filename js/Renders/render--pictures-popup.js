@@ -1,9 +1,17 @@
+import { COUNTS_LOADING_COMMENT } from '../Settings/settings--popup-picture.js';
+
 // =======================================================================
 // /////////////////////////// Rendering popup ///////////////////////////
 // =======================================================================
 
 // Picture-popup
 const picturePopup = document.querySelector('.big-picture');
+// Count comments (# из ##)
+const commentsCount = picturePopup.querySelector('.social__comment-count');
+// Comments-block
+const popupPictureComments = picturePopup.querySelector('.social__comments');
+// All-comments-count
+const allCommentsCount = picturePopup.querySelector('.comments-count');
 
 
 function renderingPicturePopup(pictureUrl, pictureCommentsData, pictureLikes) {
@@ -11,17 +19,12 @@ function renderingPicturePopup(pictureUrl, pictureCommentsData, pictureLikes) {
   setPicturePopupData(pictureUrl, pictureLikes, pictureCommentsData.length);
   createCommentsBlock(pictureCommentsData);
   addCloseButtonPopup();
-
-  // temprorality
-  picturePopup.querySelector('.social__comment-count').classList.add('hidden');
-  picturePopup.querySelector('.comments-loader').classList.add('hidden');
-
 }
 
-function setPicturePopupData(pictureUrl, pictureCommentsLength, pictureLikes) {
+function setPicturePopupData(pictureUrl, pictureLikes, pictureCommentsLength) {
   picturePopup.querySelector('.big-picture__img').querySelector('img').src = pictureUrl;
   picturePopup.querySelector('.likes-count').textContent = pictureLikes;
-  picturePopup.querySelector('.comments-count').textContent = pictureCommentsLength;
+  allCommentsCount.textContent = pictureCommentsLength;
 }
 
 
@@ -32,12 +35,12 @@ function setPicturePopupData(pictureUrl, pictureCommentsLength, pictureLikes) {
 // =======================================================================
 
 function createCommentsBlock(pictureCommentsData) {
-  const picturePopupComments = picturePopup.querySelector('.social__comments');
-  picturePopupComments.innerHTML = '';
+  popupPictureComments.innerHTML = '';
   pictureCommentsData.forEach((commentData) => {
     const newComment = createComment(commentData);
-    picturePopupComments.append(newComment);
+    popupPictureComments.append(newComment);
   });
+  loadComments();
 }
 
 function createComment(commentData) {
@@ -45,6 +48,7 @@ function createComment(commentData) {
   comment.classList.add('social__comment');
   comment.append(createCommentAvatar(commentData.name, commentData.avatar));
   comment.append(createCommentText(commentData.message));
+  comment.classList.add('hidden');
   return comment;
 }
 
@@ -63,6 +67,32 @@ function createCommentText(text) {
   commentText.classList.add('social_text');
   commentText.textContent = text;
   return commentText;
+}
+
+
+
+
+// =======================================================================
+// ////////////// Loading comments button settings ///////////////////////
+// =======================================================================
+
+// Comments-loader-button
+const commentsLoaderButton = picturePopup.querySelector('.comments-loader');
+// Current-comment-count
+let currentCommentCount = 0;
+
+commentsLoaderButton.addEventListener('click', loadComments);
+
+function loadComments() {
+  const hiddenComments = popupPictureComments.querySelectorAll('.hidden');
+  for (let i = 0; i < COUNTS_LOADING_COMMENT && i < hiddenComments.length; i++) {
+    hiddenComments[i].classList.remove('hidden');
+    if (i === hiddenComments.length - 1) {
+      commentsLoaderButton.classList.add('hidden');
+    }
+    currentCommentCount += 1;
+  }
+  commentsCount.innerHTML = `${currentCommentCount} из ${allCommentsCount.innerHTML} комментариев`;
 }
 
 
@@ -106,8 +136,10 @@ function doAfterOpenPopup() {
 
 function doAfterClosePopup() {
   document.body.classList.remove('modal-open');
+  commentsLoaderButton.classList.remove('hidden');
   closeButton.removeEventListener('click',  closePopup);
   document.removeEventListener('keydown', closePopupOnKeydownESC);
+  currentCommentCount = 0;
 }
 
 
