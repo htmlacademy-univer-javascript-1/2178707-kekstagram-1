@@ -79,7 +79,7 @@ function createCommentText(text) {
 // Comments-loader-button
 const commentsLoaderButton = picturePopup.querySelector('.comments-loader');
 // Current-comment-count
- let currentCommentCount = 0;
+let currentCommentCount = 0;
 
 commentsLoaderButton.addEventListener('click', loadComments);
 
