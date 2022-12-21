@@ -6,7 +6,7 @@ const picturesContainer = document.querySelector('.pictures');
 // Picture markup template (html)
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 // Document-fragment
-const newFragment = document.createDocumentFragment();
+const pictureFragment = document.createDocumentFragment();
 
 
 
@@ -16,6 +16,7 @@ const newFragment = document.createDocumentFragment();
 // =======================================================================
 
 function renderingPicturesOnMainPage(picturesData) {
+  getDefaultContainerState();
   picturesContainer.append(createPicturesFragment(picturesData));
 }
 
@@ -26,12 +27,17 @@ function createPicturesFragment(picturesData) {
     newPicture.querySelector('.picture__comments').textContent = comments.length;
     newPicture.querySelector('.picture__likes').textContent = likes;
     newPicture.addEventListener('click', () => renderingPicturePopup(url, comments, likes));
-    newFragment.append(newPicture);
+    pictureFragment.append(newPicture);
   });
-  return newFragment;
+  return pictureFragment;
 }
 
-
+function getDefaultContainerState() {
+  const currentPictures = picturesContainer.querySelectorAll('.picture')
+  currentPictures.forEach((picture) => {
+    picturesContainer.removeChild(picture);
+  });
+}
 
 
 // =======================================================================

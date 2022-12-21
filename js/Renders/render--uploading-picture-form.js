@@ -1,8 +1,9 @@
-import { scalePopupSettings } from '../settings.js';
-import { filterEffectSettings } from '../settings.js';
+import { scalePopupSettings } from '../Settings/settings--uploading-picture.js';
+import { filterEffectSettings } from '../Settings/settings--uploading-picture.js';
 import { effectsDictionary } from '../data.js';
 import { effectsMeasurements } from '../data.js';
-import { getStringAttribute } from '../Functions/functions.js';
+import { getStringAttribute } from '../util.js';
+import { getNameEffectClass } from '../util.js';
 
 
 // User-form
@@ -17,7 +18,6 @@ const uploadedPictureForm = userForm.querySelector('.img-upload__overlay');
 const filterEffectSlider = userForm.querySelector('.effect-level__slider');
 // Effects checkbox (radio)
 const filterEffects = userForm.querySelectorAll('.effects__radio');
-
 
 
 pictureFile.addEventListener('change', () => {
@@ -42,7 +42,7 @@ function renderingUploadingPicturesForm() {
 
 
 // =======================================================================
-// //////////////////////// rendering a scale ////////////////////////////
+// /////////////////////// rendering the scale ///////////////////////////
 // =======================================================================
 
 // Picture scale
@@ -92,7 +92,6 @@ function changeValueScaleSmaller() {
 noUiSlider.create(filterEffectSlider, filterEffectSettings.chrome);
 let previewEffectName = '';
 
-
 function addPicturesEffect () {
   filterEffects.forEach((effect) => {
     effect.addEventListener('change', (evt) => {
@@ -123,10 +122,6 @@ function setOriginalEffect() {
   filterEffectSlider.classList.add('hidden');
 }
 
-function getNameEffectClass (value){
-  return `effects__preview--${value}`;
-}
-
 
 
 
@@ -134,8 +129,11 @@ function getNameEffectClass (value){
 // ////////////////////// close button settings //////////////////////////
 // =======================================================================
 
+// Close-form-button
+const closeButton = uploadedPictureForm.querySelector('#upload-cancel');
+
+
 function addCloseButtonForm() {
-  const closeButton = uploadedPictureForm.querySelector('#upload-cancel');
   closeButton.addEventListener('click',  closeForm);
   document.addEventListener('keydown', closeFormOnKeydownESC);
 }
@@ -168,6 +166,7 @@ function doAfterOpenForm() {
 
 function doAfterCloseForm() {
   document.body.classList.remove('modal-open');
+  closeButton.removeEventListener('click',  closeForm);
   document.removeEventListener('keydown', closeFormOnKeydownESC);
   mainPicture.classList.remove(getNameEffectClass(previewEffectName));
   mainPicture.style.filter = null;
