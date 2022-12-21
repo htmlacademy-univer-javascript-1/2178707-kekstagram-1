@@ -21,7 +21,7 @@ function compareDiscussing (picture1, picture2) {
 
 function compareRandom () {
   return 0.5 - Math.random();
-} 
+}
 
 
 
