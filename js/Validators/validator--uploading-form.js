@@ -12,6 +12,8 @@ const hastagsField = uploadedPictureForm.querySelector('.text__hashtags');
 const description = uploadedPictureForm.querySelector('.text__description');
 
 
+
+
 // ==========================================================================
 // ////////////////////////// Create pristine ///////////////////////////////
 // ==========================================================================
@@ -21,6 +23,8 @@ const pristineUploadingForm = new Pristine(formUploadingPicture, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper__error'
 });
+
+
 
 
 // ==========================================================================
@@ -76,6 +80,8 @@ function getErrorMessage() {
 }
 
 
+
+
 // ==========================================================================
 // //////////////////// Cancel escape with on focus ////////////////////////
 // ==========================================================================
@@ -93,6 +99,8 @@ function cancelEscapeWithEsc(field, evt) {
     evt.stopPropagation();
   }
 }
+
+
 
 
 // =======================================================================
